@@ -1,0 +1,11 @@
+[project]
+name = "mlpipe"
+version = "0.3.0"
+description = "Modular ML pipeline with yaml configs, model registry, diagnostics"
+dependencies = [
+    "pandas",
+    "scikit-learn",
+    "networkx",
+    "loguru",
+    "pyyaml"
+]
