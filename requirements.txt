@@ -3,6 +3,6 @@ yaml
 sklearn
 pandas
 loguru
-onnxruntime
+onnxruntime-gpu
 numpy
 torch
