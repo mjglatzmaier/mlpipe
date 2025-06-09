@@ -1,6 +1,6 @@
 # mlpipe
 
-**A professional, modular pipeline framework for machine learning workflows.**
+**A modular pipeline framework for machine learning workflows.**
 
 ---
 
