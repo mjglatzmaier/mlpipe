@@ -1,5 +1,8 @@
 import networkx as nx
 from core.stage import get_stage_class
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import partial
+import copy
 
 class PipelineExecutor:
     def __init__(self, stages):
@@ -7,7 +10,10 @@ class PipelineExecutor:
         self.graph = nx.DiGraph()
         for name, cfg in self.stages.items():
             self.graph.add_node(name)
-            for dep in cfg.get('after', []):
+            after = cfg.get("after", [])
+            if isinstance(after, str):
+                after = [after]
+            for dep in after:
                 self.graph.add_edge(dep, name)
 
     def run(self, ctx):
