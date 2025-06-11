@@ -2,7 +2,6 @@ from core.stage import Stage, register_stage
 from core.context import PipelineContext
 from utils.mode import PipelineMode
 
-
 @register_stage("DummyStage")
 class DummyStage(Stage):
     def setup(self, ctx):
@@ -20,7 +19,6 @@ class DummyStage(Stage):
 
     def postprocess(self, ctx):
         ctx.metadata["postprocess"] = True
-
 
     def process_train(self, ctx):
         print("Processing in TRAIN mode.")

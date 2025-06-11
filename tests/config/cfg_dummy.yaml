@@ -1,0 +1,5 @@
+pipeline:
+  - name: dummy
+    stage: DummyStage
+    config:
+      message: "Configured via YAML!"
