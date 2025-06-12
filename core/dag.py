@@ -1,5 +1,5 @@
 import networkx as nx
-from core.stage import get_stage_class
+from core.registry import registry
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import partial
 import copy
@@ -19,7 +19,7 @@ class PipelineExecutor:
     def run(self, ctx):
         for name in nx.topological_sort(self.graph):
             stage_cfg = self.stages[name]
-            stage_class = get_stage_class(stage_cfg['stage'])
+            stage_class = registry.get_stage_class(stage_cfg['stage'])
             stage = stage_class()
             ctx.config = stage_cfg.get('config', {})
             stage.setup(ctx)

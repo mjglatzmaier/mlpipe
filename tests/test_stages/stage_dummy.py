@@ -1,8 +1,10 @@
-from core.stage import Stage, register_stage
+
+from core.registry import registry
+from core.context import Stage
 from core.context import PipelineContext
 from utils.mode import PipelineMode
 
-@register_stage("DummyStage")
+@registry.register_stage("DummyStage")
 class DummyStage(Stage):
     def setup(self, ctx):
         ctx.metadata["setup"] = True
