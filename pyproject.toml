@@ -1,23 +1,68 @@
 [project]
 name = "mlpipe"
-version = "0.4.0"
-description = "Modular ML pipeline with YAML configs, diagnostics, ONNX/Torch support, and parallelism"
+version = "0.5.0"
+description = "A lightweight DAG-based pipeline framework for ML workflows"
 authors = [
-    { name = "Your Name", email = "you@example.com" }
+    { name = "M.Glatzmaier" }
 ]
 requires-python = ">=3.10"
 readme = { file = "README.md", content-type = "text/markdown" }
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
+    "networkx",
+    "pyyaml",
+    "loguru",
+    "joblib",
+]
+
+[project.optional-dependencies]
+ml = [
     "numpy",
     "pandas",
     "scikit-learn",
-    "pyyaml",
-    "networkx",
-    "loguru",
+]
+torch = [
+    "torch",
+]
+onnx = [
+    "onnxruntime",
+]
+gpu = [
     "torch",
     "onnxruntime-gpu",
+]
+dev = [
+    "pytest",
+    "ruff",
 ]
 
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

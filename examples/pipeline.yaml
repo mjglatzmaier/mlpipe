@@ -1,0 +1,12 @@
+# Example pipeline configuration for mlpipe.
+# Run with: python examples/yaml_pipeline.py
+
+pipeline:
+  - name: greet
+    stage: Greeter
+    config:
+      name: YAML User
+
+  - name: uppercase
+    stage: Uppercaser
+    after: greet

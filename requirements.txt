@@ -1,8 +1,4 @@
 networkx
-yaml
-sklearn
-pandas
+pyyaml
 loguru
-onnxruntime-gpu
-numpy
-torch
+joblib

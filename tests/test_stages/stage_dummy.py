@@ -1,37 +1,45 @@
+"""Example dummy stage for testing."""
 
-from core.registry import registry
-from core.context import Stage
-from core.context import PipelineContext
-from utils.mode import PipelineMode
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from mlpipe.core.registry import registry
+from mlpipe.core.stage import Stage
+from mlpipe.utils.mode import PipelineMode
+
+if TYPE_CHECKING:
+    from mlpipe.core.context import PipelineContext
+
 
 @registry.register_stage("DummyStage")
 class DummyStage(Stage):
-    def setup(self, ctx):
+    """A no-op stage used in tests and examples."""
+
+    def setup(self, ctx: PipelineContext) -> None:
         ctx.metadata["setup"] = True
 
-    def process(self, ctx):
+    def process(self, ctx: PipelineContext) -> None:
+        ctx.metadata["process"] = True
+
         if ctx.mode == PipelineMode.TRAIN:
-            self.process_train(ctx)
-        elif ctx.mode == PipelineMode.LABEL:
-            self.process_label(ctx)
+            self._process_train(ctx)
         elif ctx.mode == PipelineMode.INFER:
-            self.process_infer(ctx)
+            self._process_infer(ctx)
+        elif ctx.mode == PipelineMode.LABEL:
+            self._process_label(ctx)
         else:
             raise ValueError(f"Unsupported mode: {ctx.mode}")
 
-    def postprocess(self, ctx):
+    def postprocess(self, ctx: PipelineContext) -> None:
         ctx.metadata["postprocess"] = True
 
-    def process_train(self, ctx):
-        print("Processing in TRAIN mode.")
+    def _process_train(self, ctx: PipelineContext) -> None:
+        pass
 
-    def process_label(self, ctx):
-        print("Processing in LABEL mode.")
-
-    def process_infer(self, ctx):
-        message = ctx.config.get("message", "no message provided")
-        print(f"[Dummy] Processing with message: {message}")
-        ctx.metadata["process"] = True
-        if "sleep" in ctx.config:
+    def _process_infer(self, ctx: PipelineContext) -> None:
+        message = ctx.stage_config.get("message", "no message provided")
+        ctx.metadata["infer_message"] = message
+        if "sleep" in ctx.stage_config:
             import time
-            time.sleep(ctx.config["sleep"])
+            time.sleep(ctx.stage_config["sleep"])

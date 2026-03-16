@@ -183,6 +183,9 @@ cython_debug/
 # Ruff stuff:
 .ruff_cache/
 
+# mlpipe logs
+logs/
+
 # PyPI configuration file
 .pypirc
 
