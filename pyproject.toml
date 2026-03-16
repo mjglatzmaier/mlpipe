@@ -1,6 +1,6 @@
 [project]
 name = "mlpipe"
-version = "0.5.0"
+version = "2.0.0"
 description = "A lightweight DAG-based pipeline framework for ML workflows"
 authors = [
     { name = "M.Glatzmaier" }

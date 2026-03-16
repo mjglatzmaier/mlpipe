@@ -5,7 +5,7 @@ Define pipeline stages, wire them with YAML or Python dicts, and execute
 them in topological order with optional joblib-based parallelism.
 """
 
-__version__ = "0.5.0"
+__version__ = "2.0.0"
 __author__ = "M.Glatzmaier"
 
 from .core.context import PipelineContext
